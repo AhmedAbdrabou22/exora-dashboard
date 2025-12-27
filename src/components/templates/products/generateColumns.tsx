@@ -1,0 +1,142 @@
+import { type ColumnDef } from "@tanstack/react-table";
+import UpdateCity from "./UpdateCity";
+import DeleteCity from "./Delete";
+
+/* ===================== TYPES ===================== */
+
+export type SubCategory = {
+    id: number;
+    name_ar: string;
+    name_en: string;
+    image: string;
+    category_id: number;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ProductImage = {
+    id: number;
+    product_id: number;
+    image_path: string;
+    created_at: string;
+    updated_at: string;
+};
+
+export type Product = {
+    id: number;
+    name: string;
+    description: string;
+    price: string;
+    stock: number;
+    sub_category_id: number;
+    created_at: string;
+    updated_at: string;
+
+    rating: number;
+    reviews_count: number;
+
+    sub_category: SubCategory;
+    images: ProductImage[];
+
+    is_favorite: boolean;
+    favorite_id: number | null;
+};
+
+type GenerateColumnsProps = {
+    refetch: () => void;
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setMainData: React.Dispatch<React.SetStateAction<Product | null>>;
+};
+
+/* ===================== COLUMNS ===================== */
+
+export const generateColumns = ({
+    refetch,
+    setIsModalOpen,
+    setMainData,
+}: GenerateColumnsProps): ColumnDef<Product, unknown>[] => [
+        {
+            header: "ID",
+            accessorKey: "id",
+            cell: ({ getValue }) => (
+                <span className="font-mono">{getValue<number>()}</span>
+            ),
+        },
+
+        {
+            header: "Image",
+            accessorFn: (row) => row.images?.[0]?.image_path,
+            cell: ({ getValue }) =>
+                getValue<string>() ? (
+                    <img
+                        src={getValue<string>()}
+                        alt="Product"
+                        className="h-10 w-10 object-cover rounded-md"
+                    />
+                ) : (
+                    <span className="text-gray-400">—</span>
+                ),
+        },
+
+        {
+            header: "Name",
+            accessorKey: "name",
+            cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+        },
+
+        {
+            header: "Price",
+            accessorKey: "price",
+            cell: ({ getValue }) => (
+                <span className="font-semibold">{getValue<string>()} EGP</span>
+            ),
+        },
+
+        {
+            header: "Stock",
+            accessorKey: "stock",
+            cell: ({ getValue }) => (
+                <span
+                    className={`font-medium ${getValue<number>() > 0 ? "text-green-600" : "text-red-600"
+                        }`}
+                >
+                    {getValue<number>()}
+                </span>
+            ),
+        },
+
+        {
+            header: "Sub Category",
+            accessorFn: (row) => row.sub_category?.name_en,
+            cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+        },
+
+        {
+            header: "Rating",
+            accessorKey: "rating",
+            cell: ({ getValue }) => (
+                <span className="font-medium">{getValue<number>()} ⭐</span>
+            ),
+        },
+
+        {
+            header: "Actions",
+            accessorKey: "actions",
+            cell: ({ row }) => (
+                <div className="flex">
+                    <UpdateCity
+                        refetch={refetch}
+                        setModel={setIsModalOpen}
+                        info={row}
+                        setData={setMainData}
+                    />
+                    <DeleteCity
+                        refetch={refetch}
+                        
+                        info={row}
+                       
+                    />
+                </div>
+            ),
+        },
+    ];

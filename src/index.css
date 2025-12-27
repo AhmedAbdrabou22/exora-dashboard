@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@import "tailwindcss";
+:root {
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+  --bs-border-width: 1px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Cairo", sans-serif;
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  color: var(--bs-body-color);
+  text-align: var(--bs-body-text-align);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Popup */
+.custom-swal {
+  border-radius: 16px;
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+  background: #0f172a; /* dark slate */
+  color: #e5e7eb;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Title */
+.custom-swal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+/* Input */
+.custom-swal-input {
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e5e7eb;
+  padding: 0.75rem;
+}
+
+/* Confirm Button */
+.custom-swal-confirm {
+  background: #22c55e;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-inline-start: 0.5rem;
+}
+
+.custom-swal-confirm:hover {
+  background: #16a34a;
+}
+
+/* Cancel Button */
+.custom-swal-cancel {
+  background: #334155;
+  color: #e5e7eb;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+}
+
+.custom-swal-cancel:hover {
+  background: #475569;
+}
