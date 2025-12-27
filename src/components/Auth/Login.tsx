@@ -23,7 +23,7 @@ const Login = () => {
         onSuccess: (data: LoginResponse_TP) => {
             Cookies.set('token', data?.data?.token);
             notify('success', 'Login successful');
-            navigate('/');
+            navigate('/dashboard');
         },
         onError: (err: CError_TP) => {
             notify('error', err.response?.data?.message || 'Login failed');

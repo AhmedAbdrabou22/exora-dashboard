@@ -11,17 +11,17 @@ import {
 import { useState } from "react";
 
 const links = [
-    { label: "الرئيسية", icon: FiHome, link: "/" },
+    { label: "الرئيسية", icon: FiHome, link: "/dashboard" },
     {
         label: "التصنيفات",
         icon: FiUsers,
         link: "/categories",
         subLinks: [
-            { label: "الاصناف الرئيسية", link: "/categories" },
-            { label: "الاصناف الفرعيه", link: "/sup-categories" },
+            { label: "الاصناف الرئيسية", link: "/dashboard/categories" },
+            { label: "الاصناف الفرعيه", link: "/dashboard/sup-categories" },
         ],
     },
-    { label: "المنتجات", icon: FiClipboard, link: "/products" },
+    { label: "المنتجات", icon: FiClipboard, link: "/dashboard/products" },
     { label: "الإعدادات", icon: FiSettings, link: "/settings" },
 ];
 

@@ -22,19 +22,17 @@ export const AllRoutesProvider = () => {
 
     return (
         <Routes>
-
-            <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-                <Route path="*" element={<ErrorPage />} />
-                <Route
+ <Route
                     index
                     element={
-                        <SuspenseWrapper>
-                            <h1>Main</h1>
-                        </SuspenseWrapper>
+                        <Login/>
                     }
                 />
+            <Route path="/dashboard" element={<Root />} errorElement={<ErrorPage />}>
+                <Route path="*" element={<ErrorPage />} />
+               
                 <Route
-                    path="/categories"
+                    path="/dashboard/categories"
                     element={
                         <SuspenseWrapper>
                             <Categories title={("categories")} />
@@ -42,7 +40,7 @@ export const AllRoutesProvider = () => {
                     }
                 />
                 <Route
-                    path="/sup-categories"
+                    path="/dashboard/sup-categories"
                     element={
                         <SuspenseWrapper>
                             <SupCategories title={("sup categories")} />
@@ -50,7 +48,7 @@ export const AllRoutesProvider = () => {
                     }
                 />
                 <Route
-                    path="/products"
+                    path="/dashboard/products"
                     element={
                         <SuspenseWrapper>
                             <Products title={("products")} />
