@@ -1,10 +1,9 @@
 import SelectCategories from "../../atoms/Select/CategorySelect";
 import { BaseInput } from "../../molecules/BaseInput";
 import FileInput from "../../molecules/FileInput";
+import type { Category } from "./generateColumns";
 
-
-function MainData({update}) {
-
+function MainData({ update }: { update?: Category | null }) {
 
   return (
     <div>
@@ -17,7 +16,7 @@ function MainData({update}) {
         required
       />
 
-      <FileInput name="image" label="الصورة" accept="image/*" placeholder="اختر صورة" existingFile={update?.original.image} />
+      <FileInput name="image" label="الصورة" accept="image/*" placeholder="اختر صورة" existingFile={update?.image} />
     </div>
   );
 }

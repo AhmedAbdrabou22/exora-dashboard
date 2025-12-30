@@ -1,8 +1,12 @@
 import { BaseInput } from "../../molecules/BaseInput";
 import FileInput from "../../molecules/FileInput";
+import type { Category } from "./Main";
 
+type MainDataProps = {
+  update?: Category | null;
+};
 
-function MainData({update}) {
+function MainData({ update }: MainDataProps) {
   console.log(update)
 
   return (

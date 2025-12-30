@@ -2,8 +2,11 @@ import { FieldArray } from "formik";
 import { BaseInput } from "../../molecules/BaseInput";
 import FileInput from "../../molecules/FileInput";
 import SelectSupCategories from "../../atoms/Select/SupCategorySelect";
+import type { Product, ProductImage } from "./Main";
 
-function MainData({ update }: { update: any }) {
+function MainData({ update }: { update?: Product | null }) {
+  const existingImages: ProductImage[] = update?.images ?? [];
+
   return (
     <div className="space-y-6">
       <BaseInput
@@ -44,11 +47,11 @@ function MainData({ update }: { update: any }) {
       />
 
       {/* Existing images (edit mode) */}
-      {update?.original?.images?.length > 0 && (
+      {existingImages.length > 0 && (
         <div>
           <p className="mb-2 text-sm font-medium">الصور الحالية</p>
           <div className="flex gap-3 flex-wrap">
-            {update.original.images.map((img: any) => (
+            {existingImages.map((img: ProductImage) => (
               <img
                 key={img.id}
                 src={img.image_path}
@@ -62,12 +65,12 @@ function MainData({ update }: { update: any }) {
 
       {/* New Images */}
       <FieldArray name="images">
-        {({ push, remove, form }) => (
+        {({ push, form }) => (
           <div>
             <p className="mb-3 text-sm font-medium">صور المنتج</p>
 
             <div className="grid grid-cols-2 gap-4">
-              {form.values.images.map((_: any, index: number) => (
+              {(form.values.images as (File | null)[]).map((_, index: number) => (
                 <FileInput
                   key={index}
                   name={`images.${index}`}

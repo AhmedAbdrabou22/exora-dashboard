@@ -22,7 +22,6 @@ const links = [
         ],
     },
     { label: "المنتجات", icon: FiClipboard, link: "/dashboard/products" },
-    { label: "الإعدادات", icon: FiSettings, link: "/settings" },
 ];
 
 interface SideBarProps {

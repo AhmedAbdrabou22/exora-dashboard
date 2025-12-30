@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Burger, ActionIcon, useMantineColorScheme } from "@mantine/core";
-import { FiSun, FiMoon } from "react-icons/fi";
+import { Burger } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 interface NavBarProps {
@@ -11,7 +10,6 @@ interface NavBarProps {
 
 const NavBar = ({ collapsed, onToggleSidebar, onLogout }: NavBarProps) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { colorScheme, setColorScheme } = useMantineColorScheme();
 
     return (
         <header
@@ -36,13 +34,13 @@ const NavBar = ({ collapsed, onToggleSidebar, onLogout }: NavBarProps) => {
 
                 {/* Right */}
                 <div className="flex items-center gap-4">
-                    <ActionIcon
+                    {/* <ActionIcon
                         variant="default"
                         onClick={() => setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')}
                         size="lg"
                     >
                         {colorScheme === 'dark' ? <FiSun size={16} /> : <FiMoon size={16} />}
-                    </ActionIcon>
+                    </ActionIcon> */}
 
 
 

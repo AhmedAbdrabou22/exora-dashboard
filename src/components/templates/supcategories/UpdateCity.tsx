@@ -4,14 +4,12 @@ import type { Category } from "./generateColumns";
 
 
 type UpdateCity_TP = {
-  refetch: () => void;
   setModel: Dispatch<SetStateAction<boolean>>;
   setData: Dispatch<SetStateAction<Category | null>>;
   info: Category; // row.original من react-table
 };
 
 function UpdateCity({
-  refetch,
   setModel,
   setData,
   info,

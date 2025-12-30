@@ -1,4 +1,4 @@
-import { Form, Formik, FieldArray } from "formik";
+import { Form, Formik } from "formik";
 import MainData from "./MainData";
 import { useMutate } from "../../hooks/useMutate";
 import { HandleBackErrors } from "../../../utils/HandleBackErrors";
@@ -6,20 +6,34 @@ import { Button } from "../../atoms/buttons/Button";
 import { OuterFormLayout } from "../../molecules/OuterFormLayout";
 import { notify } from "../../../utils/toast";
 
-type AddProductProps = {
-  refetch: () => void;
-  update: any;
+import type { Product } from "./Main";
+
+type FormValues = {
+  name: string;
+  description: string;
+  price: string;
+  stock: number | string;
+  sub_category_id: number | string;
+  images: (File | null)[];
 };
 
-function Add({ refetch, update }: AddProductProps) {
-  const initialValues = {
-    name: update?.original?.name || "",
-    description: update?.original?.description || "",
-    price: update?.original?.price || "",
-    stock: update?.original?.stock || "",
-    sub_category_id: update?.original?.sub_category_id || "",
+type AddProductProps = {
+  refetch: () => void;
+  update?: Product | null;
+  data?: Product[];
+};
+
+function Add({ refetch, update, data: _data }: AddProductProps) {
+  const initialValues: FormValues = {
+    name: update?.name || "",
+    description: update?.description || "",
+    price: update?.price || "",
+    stock: update?.stock || "",
+    sub_category_id: update?.sub_category_id || "",
     images: [], // دايمًا فاضية – existing images للعرض فقط
   };
+
+  void _data;
 
   const { mutate, isLoading } = useMutate({
     mutationKey: ["products"],
@@ -36,7 +50,7 @@ function Add({ refetch, update }: AddProductProps) {
 
   const { mutate: updateProduct, isLoading: updateLoading } = useMutate({
     mutationKey: ["products"],
-    endpoint: `products/${update?.original?.id}`,
+    endpoint: `products/${update?.id}`,
     method: "patch",
     formData: true,
     onSuccess: () => {
@@ -48,12 +62,12 @@ function Add({ refetch, update }: AddProductProps) {
     },
   });
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: FormValues) => {
     const payload = {
       ...values,
     };
 
-    if (update?.original?.id) {
+    if (update?.id) {
       updateProduct(payload);
     } else {
       mutate(payload);
@@ -61,7 +75,7 @@ function Add({ refetch, update }: AddProductProps) {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik<FormValues> initialValues={initialValues} onSubmit={handleSubmit}>
       {() => (
         <Form>
           <HandleBackErrors>

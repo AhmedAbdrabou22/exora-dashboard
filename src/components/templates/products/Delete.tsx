@@ -3,14 +3,16 @@ import { useMutate } from "../../hooks/useMutate";
 import { notify } from "../../../utils/toast";
 import { MdDelete, MdClose } from "react-icons/md";
 
+import type { Product } from "./Main";
+
 type DeleteCityProps = {
   refetch: () => void;
-  info: any;
+  info: Product;
 };
 
 function DeleteCity({ refetch, info }: DeleteCityProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const productId = info.original.id;
+  const productId = info.id;
 
   const { mutate, isPending } = useMutate({
     mutationKey: ["products"],

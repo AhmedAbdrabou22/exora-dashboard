@@ -1,6 +1,7 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import UpdateCity from "./UpdateCity";
 import DeleteCity from "./Delete";
+import type { Product } from "./Main";
 
 /* ===================== TYPES ===================== */
 
@@ -20,26 +21,6 @@ export type ProductImage = {
     image_path: string;
     created_at: string;
     updated_at: string;
-};
-
-export type Product = {
-    id: number;
-    name: string;
-    description: string;
-    price: string;
-    stock: number;
-    sub_category_id: number;
-    created_at: string;
-    updated_at: string;
-
-    rating: number;
-    reviews_count: number;
-
-    sub_category: SubCategory;
-    images: ProductImage[];
-
-    is_favorite: boolean;
-    favorite_id: number | null;
 };
 
 type GenerateColumnsProps = {
@@ -125,16 +106,13 @@ export const generateColumns = ({
             cell: ({ row }) => (
                 <div className="flex">
                     <UpdateCity
-                        refetch={refetch}
                         setModel={setIsModalOpen}
-                        info={row}
+                        info={row.original}
                         setData={setMainData}
                     />
                     <DeleteCity
                         refetch={refetch}
-                        
-                        info={row}
-                       
+                        info={row.original}
                     />
                 </div>
             ),

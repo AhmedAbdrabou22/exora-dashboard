@@ -1,5 +1,6 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import UpdateCity from "./UpdateCity";
+import DeleteCity from "./Delete";
 
 type GenerateColumnsProps = {
     refetch: () => void;
@@ -21,6 +22,7 @@ export type Category = {
     name_ar: string;
     name_en: string;
     image: string;
+    category_id?: number;
     created_at: string;
     updated_at: string;
     sub_categories: SubCategory[];
@@ -64,12 +66,17 @@ export const generateColumns = ({
             header: "Actions",
             accessorKey: "actions",
             cell: ({ row }) => (
-                <UpdateCity
-                    refetch={refetch}
+               < div className="flex">
+                 <UpdateCity
                     setModel={setIsModalOpen}
-                    info={row}         
+                    info={row.original}
                     setData={setMainData}
                 />
+                <DeleteCity
+                        refetch={refetch}
+                        info={row.original}
+                    />
+               </div>
             )
 
         },

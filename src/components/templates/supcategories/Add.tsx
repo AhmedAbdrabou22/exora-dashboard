@@ -5,19 +5,27 @@ import { HandleBackErrors } from "../../../utils/HandleBackErrors";
 import { Button } from "../../atoms/buttons/Button";
 import { OuterFormLayout } from "../../molecules/OuterFormLayout";
 import { notify } from "../../../utils/toast";
+import type { Category } from "./generateColumns";
+
+type FormValues = {
+  name_ar: string;
+  name_en: string;
+  category_id: number | string;
+  image: File | string | null;
+};
 
 type AddRoomType_TP = {
   refetch: () => void;
-  update: any;
-  data: any;
+  update?: Category | null;
+  data?: Category[];
 };
 function Add({ refetch, update }: AddRoomType_TP) {
   console.log("update", update)
-  const initialValues = {
-    name_ar: update?.original.name_ar || "",
-    name_en: update?.original.name_en || "",
-    category_id: update?.original.category_id || "",
-    image: update?.original.image || "",
+  const initialValues: FormValues = {
+    name_ar: update?.name_ar || "",
+    name_en: update?.name_en || "",
+    category_id: update?.category_id || "",
+    image: update?.image || null,
   };
   const { mutate, isLoading } = useMutate({
 
@@ -35,7 +43,7 @@ function Add({ refetch, update }: AddRoomType_TP) {
   });
   const { mutate: PostUpdate, isLoading: updateLoading } = useMutate({
     mutationKey: ["sub-categories"],
-    endpoint: `sub-categories/${update?.original.id}`,
+    endpoint: `sub-categories/${update?.id}`,
     method:'patch',
     onSuccess: () => {
       refetch();
@@ -47,9 +55,9 @@ function Add({ refetch, update }: AddRoomType_TP) {
     formData: true,
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: FormValues) => {
 
-    if (update?.original.id) {
+    if (update?.id) {
       PostUpdate({
         ...values,
       });
@@ -60,10 +68,10 @@ function Add({ refetch, update }: AddRoomType_TP) {
 
   return (
     <>
-      <Formik
+      <Formik<FormValues>
         initialValues={initialValues}
         // validationSchema={validationSchema}
-        onSubmit={(values: any) => handleSubmit(values)}
+        onSubmit={(values: FormValues) => handleSubmit(values)}
       >
         <Form>
           <HandleBackErrors>
@@ -88,5 +96,5 @@ function Add({ refetch, update }: AddRoomType_TP) {
   );
 }
 
-export default Add;
+export default Add; 
 

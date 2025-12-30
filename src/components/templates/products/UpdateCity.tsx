@@ -1,17 +1,15 @@
 import type { Dispatch, SetStateAction } from "react";
 import { Edit } from "../../atoms/icons/Edit";
-import type { Category } from "./generateColumns";
+import type { Product } from "./Main";
 
 
 type UpdateCity_TP = {
-  refetch: () => void;
   setModel: Dispatch<SetStateAction<boolean>>;
-  setData: Dispatch<SetStateAction<Category | null>>;
-  info: Category; // row.original من react-table
+  setData: Dispatch<SetStateAction<Product | null>>;
+  info: Product; // row.original من react-table
 };
 
 function UpdateCity({
-  refetch,
   setModel,
   setData,
   info,

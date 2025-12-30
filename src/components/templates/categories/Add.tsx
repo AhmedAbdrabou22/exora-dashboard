@@ -1,22 +1,28 @@
 import { Form, Formik } from "formik";
 import MainData from "./MainData";
+import type { Category } from "./Main";
 import { useMutate } from "../../hooks/useMutate";
 import { HandleBackErrors } from "../../../utils/HandleBackErrors";
 import { Button } from "../../atoms/buttons/Button";
 import { OuterFormLayout } from "../../molecules/OuterFormLayout";
 import { notify } from "../../../utils/toast";
 
+type FormValues = {
+  name_ar: string;
+  name_en: string;
+  image: File | string | null;
+};
+
 type AddRoomType_TP = {
   refetch: () => void;
-  update: any;
-  data: any;
+  update?: Category | null;
+  data?: Category[];
 };
 function Add({ refetch, update }: AddRoomType_TP) {
-  console.log("update", update)
-  const initialValues = {
+  const initialValues: FormValues = {
     name_ar: update?.name_ar || "",
     name_en: update?.name_en || "",
-    image: update?.image || "",
+    image: update?.image || null,
   };
   const { mutate, isLoading } = useMutate({
     mutationKey: ["categories"],
@@ -34,7 +40,7 @@ function Add({ refetch, update }: AddRoomType_TP) {
   const { mutate: PostUpdate, isLoading: updateLoading } = useMutate({
     mutationKey: ["categories"],
     endpoint: `categories/${update?.id}`,
-    method:"patch",
+    method:"post",
     onSuccess: () => {
       refetch();
     
@@ -45,13 +51,11 @@ function Add({ refetch, update }: AddRoomType_TP) {
     formData: true,
   });
 
-  const handleSubmit = (values) => {
-    
-
+  const handleSubmit = (values: FormValues) => {
     if (update?.id) {
       PostUpdate({
         ...values,
-       
+        method: "patch",
       });
     } else {
       console.log("submissionData", values);
@@ -61,10 +65,10 @@ function Add({ refetch, update }: AddRoomType_TP) {
 
   return (
     <>
-      <Formik
+      <Formik<FormValues>
         initialValues={initialValues}
         // validationSchema={validationSchema}
-        onSubmit={(values: any) => handleSubmit(values)}
+        onSubmit={(values: FormValues) => handleSubmit(values)}
       >
         <Form>
           <HandleBackErrors>
