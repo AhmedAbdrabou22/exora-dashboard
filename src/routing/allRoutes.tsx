@@ -10,6 +10,7 @@ import Categories from "../pages/categories";
 import Login from "../components/Auth/Login";
 import SupCategories from "../pages/supcategories";
 import Products from "../pages/products";
+import Users from "../pages/users";
 
 interface SuspenseWrapperProps {
     children: ReactNode;
@@ -22,15 +23,15 @@ export const AllRoutesProvider = () => {
 
     return (
         <Routes>
- <Route
-                    index
-                    element={
-                        <Login/>
-                    }
-                />
+            <Route
+                index
+                element={
+                    <Login />
+                }
+            />
             <Route path="/dashboard" element={<Root />} errorElement={<ErrorPage />}>
                 <Route path="*" element={<ErrorPage />} />
-               
+
                 <Route
                     path="/dashboard/categories"
                     element={
@@ -55,7 +56,15 @@ export const AllRoutesProvider = () => {
                         </SuspenseWrapper>
                     }
                 />
-                
+                <Route
+                    path="/dashboard/users"
+                    element={
+                        <SuspenseWrapper>
+                            <Users title={("users")} />
+                        </SuspenseWrapper>
+                    }
+                />
+
             </Route>
 
             <Route path="/login" element={<Login />} />

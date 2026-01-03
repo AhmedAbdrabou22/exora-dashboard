@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import {
     FiHome,
-    FiSettings,
     FiUsers,
     FiClipboard,
     FiMenu,
@@ -12,6 +11,7 @@ import { useState } from "react";
 
 const links = [
     { label: "الرئيسية", icon: FiHome, link: "/dashboard" },
+    { label: "المستخدمين", icon: FiClipboard, link: "/dashboard/users" },
     {
         label: "التصنيفات",
         icon: FiUsers,
