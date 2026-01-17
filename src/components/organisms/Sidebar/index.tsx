@@ -42,7 +42,7 @@ export const SideBar = ({ collapsed, setCollapsed }: SideBarProps) => {
 
     return (
         <aside
-            className={`fixed text-right right-0 top-0 bg-primaryLight dark:bg-primaryDark shadow-lg h-screen flex flex-col transition-all duration-300 z-50 ${collapsed ? "w-20" : "w-64"
+            className={`fixed text-right right-0 top-0 bg-white dark:bg-primaryDark shadow-lg h-screen flex flex-col transition-all duration-300 z-50 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
             {/* Logo / Brand with Toggle Button */}

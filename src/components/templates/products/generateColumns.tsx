@@ -52,7 +52,7 @@ export const generateColumns = ({
                     <img
                         src={getValue<string>()}
                         alt="Product"
-                        className="h-10 w-10 object-cover rounded-md"
+                        className="h-15 w-15 object-cover rounded-md"
                     />
                 ) : (
                     <span className="text-gray-400">—</span>
@@ -90,6 +90,13 @@ export const generateColumns = ({
             header: "Sub Category",
             accessorFn: (row) => row.sub_category?.name_en,
             cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+        },
+        {
+            header: "التاريخ",
+            accessorFn: (row) => row.created_at,
+            cell: ({ getValue }) => (
+                <span>{getValue<string>()?.slice(0, 10)}</span>
+            ),
         },
 
         {

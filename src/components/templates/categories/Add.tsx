@@ -51,17 +51,54 @@ function Add({ refetch, update }: AddRoomType_TP) {
     formData: true,
   });
 
+  // const handleSubmit = (values: FormValues) => {
+  //   if (update?.id) {
+  //     PostUpdate({
+  //       ...values,
+  //       _method: "patch",
+  //     });
+  //   } else {
+  //     console.log("submissionData", values);
+  //     mutate(values);
+  //   }
+  // };
   const handleSubmit = (values: FormValues) => {
+    // ========== UPDATE ==========
     if (update?.id) {
-      PostUpdate({
-        ...values,
-        method: "patch",
+      const formData = new FormData();
+      Object.entries(values).forEach(([key, value]) => {
+        if (key === "image" && typeof value === "string") return;
+
+        if (key === "image" && value instanceof File) {
+          formData.append("image", value);
+          return;
+        }
+
+        if (value !== undefined && value !== null) {
+          formData.append(key, value as any);
+        }
       });
-    } else {
-      console.log("submissionData", values);
-      mutate(values);
+
+      formData.append("_method", "patch");
+
+      PostUpdate(formData);
+      return;
     }
+
+    // ========== CREATE ==========
+    const formData = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value instanceof File) {
+        formData.append(key, value);
+      } else if (value !== undefined && value !== null) {
+        formData.append(key, value as any);
+      }
+    });
+
+    mutate(formData);
   };
+
 
   return (
     <>

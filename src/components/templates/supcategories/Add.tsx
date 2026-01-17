@@ -44,7 +44,7 @@ function Add({ refetch, update }: AddRoomType_TP) {
   const { mutate: PostUpdate, isLoading: updateLoading } = useMutate({
     mutationKey: ["sub-categories"],
     endpoint: `sub-categories/${update?.id}`,
-    method:'patch',
+    method:'post',
     onSuccess: () => {
       refetch();
     
@@ -55,16 +55,39 @@ function Add({ refetch, update }: AddRoomType_TP) {
     formData: true,
   });
 
+  // const handleSubmit = (values: FormValues) => {
+
+  //   if (update?.id) {
+  //     PostUpdate({
+  //       ...values,
+  //     });
+  //   } else {
+  //     mutate(values);
+  //   }
+  // };
   const handleSubmit = (values: FormValues) => {
+    const formData = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (key === "image" && typeof value === "string") return;
+      if (key === "image" && value instanceof File) {
+        formData.append("image", value);
+        return;
+      }
+      if (value !== undefined && value !== null) {
+        formData.append(key, value as any);
+      }
+    });
 
     if (update?.id) {
-      PostUpdate({
-        ...values,
-      });
+      formData.append("_method", "patch");
+
+      PostUpdate(formData);
     } else {
-      mutate(values);
+      mutate(formData);
     }
   };
+
 
   return (
     <>

@@ -134,6 +134,8 @@ function MainProducts() {
       <ModalTemplate
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        size="xl"
+
       >
         <Add
           refetch={refetch}

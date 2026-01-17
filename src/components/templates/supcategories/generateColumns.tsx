@@ -47,7 +47,7 @@ export const generateColumns = ({
                 <img
                     src={getValue<string>()}
                     alt="Category"
-                    className="h-10 w-10 object-cover rounded-md"
+                    className="h-15 w-15 object-cover rounded-md"
                 />
             ),
         },
