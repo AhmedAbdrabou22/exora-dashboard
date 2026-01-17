@@ -51,7 +51,7 @@ function Add({ refetch, update, data: _data }: AddProductProps) {
   const { mutate: updateProduct, isLoading: updateLoading } = useMutate({
     mutationKey: ["products"],
     endpoint: `products/${update?.id}`,
-    method: "patch",
+    method: "post",
     formData: true,
     onSuccess: () => {
       notify("success", "Product updated successfully");
@@ -65,6 +65,7 @@ function Add({ refetch, update, data: _data }: AddProductProps) {
   const handleSubmit = (values: FormValues) => {
     const payload = {
       ...values,
+      _method: update ? "patch" : "post",
     };
 
     if (update?.id) {
