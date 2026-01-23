@@ -86,7 +86,7 @@ function MainData({ update }: { update?: Product | null }) {
           />
 
           <div className="flex flex-col gap-1 text-right">
-            <label className="text-sm font-medium">نوع الخصم</label>
+            <label className="text-sm font-medium">نوع الخصم</label> 
             <select
               name="discount_type"
               value={values.discount_type}
