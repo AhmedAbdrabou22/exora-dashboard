@@ -11,6 +11,8 @@ import Login from "../components/Auth/Login";
 import SupCategories from "../pages/supcategories";
 import Products from "../pages/products";
 import Users from "../pages/users";
+import Contacts from "../pages/contacts";
+import Colors from "../pages/colors";
 
 interface SuspenseWrapperProps {
     children: ReactNode;
@@ -61,6 +63,22 @@ export const AllRoutesProvider = () => {
                     element={
                         <SuspenseWrapper>
                             <Users title={("users")} />
+                        </SuspenseWrapper>
+                    }
+                />
+                <Route
+                    path="/dashboard/contacts"
+                    element={
+                        <SuspenseWrapper>
+                            <Contacts title={("contacts")} />
+                        </SuspenseWrapper>
+                    }
+                />
+                <Route
+                    path="/dashboard/colors"
+                    element={
+                        <SuspenseWrapper>
+                            <Colors title={("colors")} />
                         </SuspenseWrapper>
                     }
                 />

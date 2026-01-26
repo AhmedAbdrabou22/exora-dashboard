@@ -10,10 +10,16 @@ import type { Product } from "./Main";
 
 type FormValues = {
   name: string;
+  name_ar: string;
   description: string;
-  price: string;
-  stock: number | string;
-  sub_category_id: number | string;
+  description_ar: string;
+  price: string | number;
+  stock: string | number;
+  sub_category_id: string | number;
+  colors: number[];
+  discount: string | number;
+  discount_type: string;
+  custom_fields: { key: string; value: string }[];
   images: (File | null)[];
 };
 
@@ -24,13 +30,52 @@ type AddProductProps = {
 };
 
 function Add({ refetch, update, data: _data }: AddProductProps) {
+  type FormValues = {
+    name: string;
+    name_ar: string;
+    description: string;
+    description_ar: string;
+    price: string | number;
+    stock: string | number;
+    sub_category_id: string | number;
+    colors: number[];
+    discount: string | number;
+    discount_type: string;
+    custom_fields: { key: string; value: string }[];
+    images: (File | null)[];
+  };
+
   const initialValues: FormValues = {
+    // English
     name: update?.name || "",
     description: update?.description || "",
+
+    // Arabic
+    name_ar: update?.name_ar || "",
+    description_ar: update?.description_ar || "",
+
+    // Price & Stock
     price: update?.price || "",
     stock: update?.stock || "",
+
+    // Category
     sub_category_id: update?.sub_category_id || "",
-    images: [], // دايمًا فاضية – existing images للعرض فقط
+
+    // Colors - استخراج الـ IDs من array الألوان
+    colors: update?.colors?.map((color) => color.id) || [],
+
+    // Discount
+    discount: update?.discount || "",
+    discount_type: update?.discount_type || "percentage",
+
+    // Custom Fields - استخراج key و value فقط
+    custom_fields: update?.custom_fields?.map((field) => ({
+      key: field.key,
+      value: field.value,
+    })) || [],
+
+    // Images - دايمًا فاضية للصور الجديدة
+    images: [],
   };
 
   void _data;

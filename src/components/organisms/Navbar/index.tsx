@@ -13,7 +13,7 @@ const NavBar = ({ collapsed, onToggleSidebar, onLogout }: NavBarProps) => {
 
     return (
         <header
-            className={`fixed top-0 w-full bg-primaryLight dark:bg-primaryDark shadow-md z-40 transition-all duration-300 ${collapsed ? "right-20" : "right-64"
+            className={`fixed top-0 w-full bg-white dark:bg-primaryDark shadow-md z-500  transition-all duration-300 ${collapsed ? "right-20" : "right-64"
                 }`}
             style={{ width: collapsed ? "calc(100% - 5rem)" : "calc(100% - 16rem)" }}
         >

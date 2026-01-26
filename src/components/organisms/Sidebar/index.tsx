@@ -7,11 +7,17 @@ import {
     FiChevronRight,
     FiChevronDown,
 } from "react-icons/fi";
+import { IoMdColorPalette } from "react-icons/io";
+
+import { IoMdContact } from "react-icons/io";
+
 import { useState } from "react";
 
 const links = [
     { label: "الرئيسية", icon: FiHome, link: "/dashboard" },
     { label: "المستخدمين", icon: FiClipboard, link: "/dashboard/users" },
+    {
+        label: "الالوان", icon: IoMdColorPalette, link: "/dashboard/colors" },
     {
         label: "التصنيفات",
         icon: FiUsers,
@@ -22,6 +28,8 @@ const links = [
         ],
     },
     { label: "المنتجات", icon: FiClipboard, link: "/dashboard/products" },
+    {
+        label: "التواصل", icon: IoMdContact , link: "/dashboard/contacts" },
 ];
 
 interface SideBarProps {
@@ -42,7 +50,7 @@ export const SideBar = ({ collapsed, setCollapsed }: SideBarProps) => {
 
     return (
         <aside
-            className={`fixed text-right right-0 top-0 bg-white dark:bg-primaryDark shadow-lg h-screen flex flex-col transition-all duration-300 z-50 ${collapsed ? "w-20" : "w-64"
+            className={`fixed text-right right-0 top-0 bg-white dark:bg-primaryDark  h-screen flex flex-col transition-all duration-300 z-50 ${collapsed ? "w-20" : "w-64"
                 }`}
         >
             {/* Logo / Brand with Toggle Button */}
